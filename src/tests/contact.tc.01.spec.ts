@@ -1,8 +1,4 @@
 import { test, expect } from '../fixtures/jupiter-test';
-import { exec } from 'child_process';
-import * as util from 'util';
-
-const execPromise = util.promisify(exec);
 
 test.describe('Contact Page Tests', () => {
   test('Test Case 1: Verify error messages and populate mandatory fields', async ({ homePage, contactPage }) => {
@@ -27,15 +23,5 @@ test.describe('Contact Page Tests', () => {
     // Step 5: Validate errors are gone
     const errorMessagesAfterFilling = await contactPage.getErrorMessages();
     expect(errorMessagesAfterFilling.length).toBe(0);
-  });
-
-  test.afterEach(async () => {
-    // Send Slack notification
-    try {
-      await execPromise('node src/utils/notifySlack.js');
-      console.log('Slack notification sent');
-    } catch (error) {
-      console.error('Error sending Slack notification', error);
-    }
   });
 });

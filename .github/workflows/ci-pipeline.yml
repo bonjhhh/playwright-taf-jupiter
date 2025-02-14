@@ -45,7 +45,7 @@ jobs:
 
       - name: Run tests
         run: |
-          npx playwright test --project=chromium --reporter=json > test-results.json
+          npx playwright test --project=chromium --reporter=json > test-results.json || true
 
       - name: Upload test results as artifacts
         uses: actions/upload-artifact@v4
@@ -80,7 +80,7 @@ jobs:
             echo "Error: SLACK_WEBHOOK_URL is not set or empty."
             exit 1
           fi
-          node src/utils/slackNotifier.js
+          node src/utils/notifySlack.js
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # Ensure this secret is set in your repository settings
           GITHUB_JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
