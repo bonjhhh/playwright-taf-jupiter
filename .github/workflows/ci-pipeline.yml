@@ -1,0 +1,100 @@
+name: CI/CD Pipeline
+
+on:
+  workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+
+env:
+  SLACK_CHANNEL: "#ci-cd-tests"
+  SUCCESS_COLOR: "#36a64f"
+  FAILURE_COLOR: "#ff0000"
+  TEST_PROFILE: "regression"
+  HEADLESS: ${{ vars.HEADLESS }}  # Get the value of HEADLESS from a workflow variable
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: echo "Building..."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    container:
+      image: mcr.microsoft.com/playwright:v1.48.1-focal     
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps
+
+      - name: Run tests
+        run: |
+          # Pass the HEADLESS environment variable to your tests
+          npm run cucumber $TEST_PROFILE || true
+        env:
+          HEADLESS: ${{ vars.HEADLESS }}  # Use the HEADLESS variable defined in the `env` section
+
+      - name: Create Slack integration directory and notify status
+        run: |
+          mkdir -p src/utils/slackIntegration
+          echo $? > src/utils/slackIntegration/test_status.txt
+          node src/utils/slackIntegration/notifySlack.js
+
+      - name: Upload test results as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            reports/**
+            payload.json
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download test reports and payload artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports  # Name of the artifact from the `test` job
+          path: ./artifacts   # Path where you want to download the artifact
+
+      - name: Install dependencies for Slack notification
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+          ls -l ./artifacts  # Verify downloaded files
+          cat ./artifacts/payload.json  # Verify the contents of the payload.json
+
+      - name: Send Slack notification
+        run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "Error: SLACK_WEBHOOK_URL is not set or empty."
+            exit 1
+          fi
+          curl -X POST -H "Content-type: application/json" --data @./artifacts/payload.json "$SLACK_WEBHOOK_URL"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # Use the secret here
+
+      - name: Upload payload as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: slack-payload
+          path: ./artifacts/payload.json  # Path to the uploaded artifact
