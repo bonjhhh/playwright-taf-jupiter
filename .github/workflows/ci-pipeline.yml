@@ -2,19 +2,20 @@ name: CI/CD Pipeline
 
 on:
   workflow_dispatch:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 env:
   SLACK_CHANNEL: "#ci-cd-tests"
   SUCCESS_COLOR: "#36a64f"
   FAILURE_COLOR: "#ff0000"
   TEST_PROFILE: "regression"
-  HEADLESS: ${{ vars.HEADLESS }}  # Get the value of HEADLESS from a workflow variable
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  GITHUB_JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
 jobs:
   build:
@@ -44,24 +45,14 @@ jobs:
 
       - name: Run tests
         run: |
-          # Pass the HEADLESS environment variable to your tests
-          npm run cucumber $TEST_PROFILE || true
-        env:
-          HEADLESS: ${{ vars.HEADLESS }}  # Use the HEADLESS variable defined in the `env` section
-
-      - name: Create Slack integration directory and notify status
-        run: |
-          mkdir -p src/utils/slackIntegration
-          echo $? > src/utils/slackIntegration/test_status.txt
-          node src/utils/slackIntegration/notifySlack.js
+          npx playwright test --project=chromium --reporter=json > test-results.json
 
       - name: Upload test results as artifacts
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
           path: |
-            reports/**
-            payload.json
+            test-results.json
 
   notify:
     runs-on: ubuntu-latest
@@ -81,7 +72,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl
           ls -l ./artifacts  # Verify downloaded files
-          cat ./artifacts/payload.json  # Verify the contents of the payload.json
+          cat ./artifacts/test-results.json  # Verify the contents of the test-results.json
 
       - name: Send Slack notification
         run: |
@@ -89,12 +80,13 @@ jobs:
             echo "Error: SLACK_WEBHOOK_URL is not set or empty."
             exit 1
           fi
-          curl -X POST -H "Content-type: application/json" --data @./artifacts/payload.json "$SLACK_WEBHOOK_URL"
+          node src/utils/slackNotifier.js
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # Use the secret here
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # Ensure this secret is set in your repository settings
+          GITHUB_JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
       - name: Upload payload as artifact
         uses: actions/upload-artifact@v4
         with:
           name: slack-payload
-          path: ./artifacts/payload.json  # Path to the uploaded artifact
+          path: ./artifacts/test-results.json  # Path to the uploaded artifact

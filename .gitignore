@@ -33,6 +33,7 @@ playwright-report/
 test-results/
 results.xml
 payload.json
+test-results.json
 
 # VS Code settings
 .vscode/
