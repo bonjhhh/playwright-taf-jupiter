@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build
-        run: echo "Emulating only.... Building..."
+        run: echo "Building..."
 
   test:
     runs-on: ubuntu-latest
