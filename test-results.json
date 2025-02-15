@@ -108,7 +108,7 @@
           "specs": [
             {
               "title": "Test Case 1: Verify error messages and populate mandatory fields",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -120,85 +120,45 @@
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "failed",
-                      "duration": 3634,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mxxxx\u001b[27mMessage is required\"\u001b[39m\nReceived: \u001b[31m\"Message is required\"\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mxxxx\u001b[27mMessage is required\"\u001b[39m\nReceived: \u001b[31m\"Message is required\"\u001b[39m\n    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts:20:28\n    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts:14:5",
-                        "matcherResult": {
-                          "actual": "Message is required",
-                          "expected": "xxxxMessage is required",
-                          "message": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mxxxx\u001b[27mMessage is required\"\u001b[39m\nReceived: \u001b[31m\"Message is required\"\u001b[39m",
-                          "name": "toBe",
-                          "pass": false
-                        },
-                        "location": {
-                          "file": "C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts",
-                          "column": 28,
-                          "line": 20
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 18 |\u001b[39m       expect(forenameError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'Forename is required'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 19 |\u001b[39m       expect(emailError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'Email is required'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 20 |\u001b[39m       expect(messageError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'xxxxMessage is required'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 21 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 22 |\u001b[39m\n \u001b[90m 23 |\u001b[39m     \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m'Step 4: Populate mandatory fields'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts",
-                            "column": 28,
-                            "line": 20
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mxxxx\u001b[27mMessage is required\"\u001b[39m\nReceived: \u001b[31m\"Message is required\"\u001b[39m\n\n\u001b[0m \u001b[90m 18 |\u001b[39m       expect(forenameError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'Forename is required'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 19 |\u001b[39m       expect(emailError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'Email is required'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 20 |\u001b[39m       expect(messageError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'xxxxMessage is required'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 21 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 22 |\u001b[39m\n \u001b[90m 23 |\u001b[39m     \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m'Step 4: Populate mandatory fields'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts:20:28\u001b[22m\n\u001b[2m    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts:14:5\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 7851,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Step 1: From the home page go to contact page",
-                          "duration": 2023
+                          "duration": 5173
                         },
                         {
                           "title": "Step 2: Click submit button",
-                          "duration": 328
+                          "duration": 488
                         },
                         {
                           "title": "Step 3: Verify error messages",
-                          "duration": 196,
-                          "error": {
-                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mxxxx\u001b[27mMessage is required\"\u001b[39m\nReceived: \u001b[31m\"Message is required\"\u001b[39m",
-                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mxxxx\u001b[27mMessage is required\"\u001b[39m\nReceived: \u001b[31m\"Message is required\"\u001b[39m\n    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts:20:28\n    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts:14:5",
-                            "matcherResult": {
-                              "actual": "Message is required",
-                              "expected": "xxxxMessage is required",
-                              "message": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mxxxx\u001b[27mMessage is required\"\u001b[39m\nReceived: \u001b[31m\"Message is required\"\u001b[39m",
-                              "name": "toBe",
-                              "pass": false
-                            },
-                            "location": {
-                              "file": "C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts",
-                              "column": 28,
-                              "line": 20
-                            },
-                            "snippet": "\u001b[0m \u001b[90m 18 |\u001b[39m       expect(forenameError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'Forename is required'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 19 |\u001b[39m       expect(emailError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'Email is required'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 20 |\u001b[39m       expect(messageError)\u001b[33m.\u001b[39mtoBe(\u001b[32m'xxxxMessage is required'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 21 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 22 |\u001b[39m\n \u001b[90m 23 |\u001b[39m     \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m'Step 4: Populate mandatory fields'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m"
-                          }
+                          "duration": 104
+                        },
+                        {
+                          "title": "Step 4: Populate mandatory fields",
+                          "duration": 449
+                        },
+                        {
+                          "title": "Step 5: Validate errors are gone",
+                          "duration": 30
                         }
                       ],
-                      "startTime": "2025-02-15T00:30:06.632Z",
+                      "startTime": "2025-02-15T01:02:07.738Z",
                       "attachments": [
                         {
                           "name": "trace",
                           "contentType": "application/zip",
                           "path": "C:\\Git\\source\\playwright-taf-jupiter\\test-results\\contact.tc.01-Contact-Page-4d0fc-d-populate-mandatory-fields-chromium\\trace.zip"
                         }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\contact.tc.01.spec.ts",
-                        "column": 28,
-                        "line": 20
-                      }
+                      ]
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "482538ee90940a01e56b-2c5e11c7e6f5a8f365f5",
@@ -238,7 +198,7 @@
                     {
                       "workerIndex": 1,
                       "status": "passed",
-                      "duration": 26990,
+                      "duration": 35381,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -246,15 +206,15 @@
                       "steps": [
                         {
                           "title": "Step 1: From the home page go to contact page",
-                          "duration": 2177
+                          "duration": 5587
                         },
                         {
                           "title": "Step 2: Populate mandatory fields with random data",
-                          "duration": 541
+                          "duration": 1488
                         },
                         {
                           "title": "Step 3: Click submit button",
-                          "duration": 107
+                          "duration": 95
                         },
                         {
                           "title": "Step 4: Check ARIA snapshot",
@@ -262,90 +222,90 @@
                         },
                         {
                           "title": "Step 5: Validate successful submission message",
-                          "duration": 11140
+                          "duration": 1573
                         },
                         {
                           "title": "Step 1: From the home page go to contact page",
-                          "duration": 205
+                          "duration": 257
                         },
                         {
                           "title": "Step 2: Populate mandatory fields with random data",
-                          "duration": 128
+                          "duration": 170
                         },
                         {
                           "title": "Step 3: Click submit button",
-                          "duration": 68
+                          "duration": 96
                         },
                         {
                           "title": "Step 4: Check ARIA snapshot",
-                          "duration": 27
+                          "duration": 84
                         },
                         {
                           "title": "Step 5: Validate successful submission message",
-                          "duration": 1357
+                          "duration": 5687
                         },
                         {
                           "title": "Step 1: From the home page go to contact page",
-                          "duration": 189
+                          "duration": 187
                         },
                         {
                           "title": "Step 2: Populate mandatory fields with random data",
-                          "duration": 127
+                          "duration": 144
                         },
                         {
                           "title": "Step 3: Click submit button",
-                          "duration": 64
+                          "duration": 69
                         },
                         {
                           "title": "Step 4: Check ARIA snapshot",
-                          "duration": 25
+                          "duration": 28
                         },
                         {
                           "title": "Step 5: Validate successful submission message",
-                          "duration": 5920
+                          "duration": 10029
                         },
                         {
                           "title": "Step 1: From the home page go to contact page",
-                          "duration": 189
+                          "duration": 179
                         },
                         {
                           "title": "Step 2: Populate mandatory fields with random data",
-                          "duration": 125
+                          "duration": 132
                         },
                         {
                           "title": "Step 3: Click submit button",
-                          "duration": 74
+                          "duration": 76
                         },
                         {
                           "title": "Step 4: Check ARIA snapshot",
-                          "duration": 35
+                          "duration": 31
                         },
                         {
                           "title": "Step 5: Validate successful submission message",
-                          "duration": 1345
+                          "duration": 1338
                         },
                         {
                           "title": "Step 1: From the home page go to contact page",
-                          "duration": 189
+                          "duration": 172
                         },
                         {
                           "title": "Step 2: Populate mandatory fields with random data",
-                          "duration": 122
+                          "duration": 135
                         },
                         {
                           "title": "Step 3: Click submit button",
-                          "duration": 72
+                          "duration": 82
                         },
                         {
                           "title": "Step 4: Check ARIA snapshot",
-                          "duration": 24
+                          "duration": 32
                         },
                         {
                           "title": "Step 5: Validate successful submission message",
-                          "duration": 1858
+                          "duration": 6967
                         }
                       ],
-                      "startTime": "2025-02-15T00:30:06.611Z",
+                      "startTime": "2025-02-15T01:02:07.762Z",
                       "attachments": [
                         {
                           "name": "trace",
@@ -393,9 +353,9 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 0,
                       "status": "failed",
-                      "duration": 2356,
+                      "duration": 4232,
                       "error": {
                         "message": "Error: locator.click: Error: strict mode violation: locator('a[href$=\"shop\"]') resolved to 2 elements:\n    1) <a href=\"#/shop\">…</a> aka getByRole('link', { name: 'Shop', exact: true })\n    2) <a href=\"#/shop\" class=\"btn btn-success btn-large\">Start Shopping »</a> aka getByRole('link', { name: 'Start Shopping »' })\n\nCall log:\n\u001b[2m  - waiting for locator('a[href$=\"shop\"]')\u001b[22m\n",
                         "stack": "Error: locator.click: Error: strict mode violation: locator('a[href$=\"shop\"]') resolved to 2 elements:\n    1) <a href=\"#/shop\">…</a> aka getByRole('link', { name: 'Shop', exact: true })\n    2) <a href=\"#/shop\" class=\"btn btn-success btn-large\">Start Shopping »</a> aka getByRole('link', { name: 'Start Shopping »' })\n\nCall log:\n\u001b[2m  - waiting for locator('a[href$=\"shop\"]')\u001b[22m\n\n    at HomePage.goToShopPage (C:\\Git\\source\\playwright-taf-jupiter\\src\\pages\\home.ts:23:25)\n    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\shop.tc.03.spec.ts:7:22\n    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\shop.tc.03.spec.ts:5:5",
@@ -422,7 +382,7 @@
                       "steps": [
                         {
                           "title": "Step 1: Navigate to the shop page",
-                          "duration": 2011,
+                          "duration": 3682,
                           "error": {
                             "message": "Error: locator.click: Error: strict mode violation: locator('a[href$=\"shop\"]') resolved to 2 elements:\n    1) <a href=\"#/shop\">…</a> aka getByRole('link', { name: 'Shop', exact: true })\n    2) <a href=\"#/shop\" class=\"btn btn-success btn-large\">Start Shopping »</a> aka getByRole('link', { name: 'Start Shopping »' })\n\nCall log:\n\u001b[2m  - waiting for locator('a[href$=\"shop\"]')\u001b[22m\n",
                             "stack": "Error: locator.click: Error: strict mode violation: locator('a[href$=\"shop\"]') resolved to 2 elements:\n    1) <a href=\"#/shop\">…</a> aka getByRole('link', { name: 'Shop', exact: true })\n    2) <a href=\"#/shop\" class=\"btn btn-success btn-large\">Start Shopping »</a> aka getByRole('link', { name: 'Start Shopping »' })\n\nCall log:\n\u001b[2m  - waiting for locator('a[href$=\"shop\"]')\u001b[22m\n\n    at HomePage.goToShopPage (C:\\Git\\source\\playwright-taf-jupiter\\src\\pages\\home.ts:23:25)\n    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\shop.tc.03.spec.ts:7:22\n    at C:\\Git\\source\\playwright-taf-jupiter\\src\\tests\\shop.tc.03.spec.ts:5:5",
@@ -435,7 +395,7 @@
                           }
                         }
                       ],
-                      "startTime": "2025-02-15T00:30:14.588Z",
+                      "startTime": "2025-02-15T01:02:20.340Z",
                       "attachments": [
                         {
                           "name": "trace",
@@ -465,11 +425,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-02-15T00:30:05.193Z",
-    "duration": 29265.412,
-    "expected": 1,
+    "startTime": "2025-02-15T01:02:06.588Z",
+    "duration": 37524.486,
+    "expected": 2,
     "skipped": 0,
-    "unexpected": 2,
+    "unexpected": 1,
     "flaky": 0
   }
 }

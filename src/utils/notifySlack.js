@@ -20,7 +20,8 @@ try {
 
 if (fs.existsSync(resultsPath)) {
   results = JSON.parse(fs.readFileSync(resultsPath, 'utf-8'));
-  console.log('Test Results:', JSON.stringify(results, null, 2)); // Add logging to inspect test results
+  // Commented this in the meantime to avoid logging the entire test results
+  //console.log('Test Results:', JSON.stringify(results, null, 2)); // Add logging to inspect test results
 } else {
   console.error(`Error: ${resultsPath} does not exist.`);
   process.exit(1); // Exit with an error
