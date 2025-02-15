@@ -48,10 +48,11 @@ jobs:
         run: |
           npx playwright test --project=chromium --reporter=json,html
 
-      - name: List Playwright report directory
+      - name: List Playwright report directory and test results
         if: always()
         run: |
           ls -l playwright-report
+          ls -l test-results.json
 
       - name: Upload test results as artifacts
         if: always()
