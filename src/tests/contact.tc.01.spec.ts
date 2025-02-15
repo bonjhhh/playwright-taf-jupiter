@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/jupiter-test';
 
-test.describe.only('Contact Page Tests', () => {
+test.describe('Contact Page Tests', () => {
   test('Test Case 1: Verify error messages and populate mandatory fields', async ({ homePage, contactPage }) => {
     await test.step('Step 1: From the home page go to contact page', async () => {
       await homePage.navigate();

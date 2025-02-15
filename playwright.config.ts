@@ -10,7 +10,7 @@ export default defineConfig({
   retries: 0,
   reporter: [
     ['list'],
-    [require.resolve('./src/utils/customReporter.js')],
+    //[require.resolve('./src/utils/customReporter.js')],
     ['html', { outputFolder: 'playwright-report' }],
     ['json', { outputFile: 'artifacts/test-results.json' }],
   ],
