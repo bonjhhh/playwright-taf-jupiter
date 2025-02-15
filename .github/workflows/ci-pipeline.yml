@@ -78,10 +78,8 @@ jobs:
           name: test-reports  # Name of the artifact from the `test` job
           path: ./artifacts   # Path where you want to download the artifact
 
-      - name: Install dependencies for Slack notification
+      - name: Verify downloaded files
         run: |
-          sudo apt-get update
-          sudo apt-get install -y curl
           ls -l ./artifacts  # Verify downloaded files
           cat ./artifacts/test-results.json  # Verify the contents of the test-results.json
 
