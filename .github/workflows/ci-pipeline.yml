@@ -46,7 +46,7 @@ jobs:
 
       - name: Run tests
         run: |
-          npx playwright test --project=chromium --reporter=json,html
+          npm run test
 
       - name: List Playwright report directory and test results
         if: always()
