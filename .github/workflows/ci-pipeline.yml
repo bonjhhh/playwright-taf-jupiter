@@ -81,7 +81,8 @@ jobs:
 
       - name: Verify downloaded files
         run: |
-          ls -l ./artifacts  # Verify downloaded files          
+          ls -l ./artifacts  # Verify downloaded files
+          cat ./artifacts/test-results.json  # Verify the contents of the test-results.json          
 
       - name: Send Slack notification
         run: |
