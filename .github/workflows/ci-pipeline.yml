@@ -61,11 +61,7 @@ jobs:
           name: test-reports
           path: |
             test-results.json
-            playwright-report/**
-      - name: Verify uploaded files
-        if: always()
-        run: |
-          ls -l ./artifacts  # Verify uploaded files
+            playwright-report/**     
 
   notify:
     runs-on: ubuntu-latest

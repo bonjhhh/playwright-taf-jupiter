@@ -1,11 +1,13 @@
-const { Reporter } = require('@playwright/test/reporter');
+const { Reporter } = require('@playwright/test');
 const { exec } = require('child_process');
 const util = require('util');
+const path = require('path');
 const execPromise = util.promisify(exec);
 
-class SlackReporter {
+class CustomReporter {
   async onEnd(result) {
     console.log('All tests finished. Sending Slack notification...');
+
     try {
       const { stdout, stderr } = await execPromise('node src/utils/notifySlack.js');
       console.log('Slack notification sent');
@@ -17,4 +19,4 @@ class SlackReporter {
   }
 }
 
-module.exports = SlackReporter;
+module.exports = CustomReporter;

@@ -4,7 +4,7 @@ const axios = require('axios');
 require('dotenv').config(); // Load environment variables from .env file
 
 // Path to test-results.json
-const resultsPath = path.resolve(__dirname, '../../test-results.json');
+const resultsPath = path.resolve(__dirname, '../../artifacts/test-results.json');
 const packageJsonPath = path.resolve(__dirname, '../../package.json');
 
 let results;
