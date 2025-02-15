@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures/jupiter-test';
 import { CartPage } from '../pages/cart';
 
-test.describe.only('Shop Page Tests', () => {
+test.describe('Shop Page Tests', () => {
   test('Test Case 3: Add items to cart, navigate to cart page, and validate amounts', async ({ homePage, shopPage }) => {
     await test.step('Step 1: Navigate to the shop page', async () => {
       await homePage.navigate();
