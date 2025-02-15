@@ -84,6 +84,21 @@ jobs:
           ls -l ./artifacts  # Verify downloaded files
           cat ./artifacts/test-results.json  # Verify the contents of the test-results.json          
 
+      - name: Wait for test-results.json to be created
+        run: |
+          for i in {1..10}; do
+            if [ -f "./artifacts/test-results.json" ]; then
+              echo "test-results.json found."
+              break
+            fi
+            echo "Waiting for test-results.json..."
+            sleep 1
+          done
+          if [ ! -f "./artifacts/test-results.json" ]; then
+            echo "Error: test-results.json not found after 10 seconds."
+            exit 1
+          fi
+
       - name: Send Slack notification
         run: |
           if [ -z "$SLACK_WEBHOOK_URL" ]; then
