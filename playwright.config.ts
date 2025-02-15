@@ -12,7 +12,7 @@ export default defineConfig({
     ['list'],
     //[require.resolve('./src/utils/customReporter.js')],
     ['html', { outputFolder: 'playwright-report' }],
-    ['json', { outputFile: 'artifacts/test-results.json' }],
+    ['json', { outputFile: 'test-results.json' }],
   ],
   use: {
     actionTimeout: 0,
