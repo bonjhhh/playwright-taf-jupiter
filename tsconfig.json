@@ -8,5 +8,5 @@
       "forceConsistentCasingInFileNames": true,
       "outDir": "dist"
     },
-    "include": ["src/**/*.ts", "src/utils/notifySlack.js"]
+    "include": ["src/**/*.ts", "src/utils/notifySlack_v1.js"]
   }
