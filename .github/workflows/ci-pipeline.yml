@@ -60,7 +60,7 @@ jobs:
         with:
           name: test-reports
           path: |
-            test-results.json
+            artifacts/test-results.json
             playwright-report/**     
 
   notify:
