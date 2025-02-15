@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     container:
-      image: mcr.microsoft.com/playwright:v1.50.1-focal     
+      image: mcr.microsoft.com/playwright:v1.48.1-focal     
     continue-on-error: true
     steps:
       - name: Checkout code
