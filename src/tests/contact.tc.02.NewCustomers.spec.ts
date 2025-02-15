@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures/jupiter-test';
 import { generateRandomData } from '../utils/test-data';
 
-test.describe('Contact Page Tests', () => {
+test.describe('Contact Page Tests - New Customers', () => {
   test('Test Case 2: Validate successful submission message', async ({ homePage, contactPage, page }) => {
     for (let i = 0; i < 5; i++) {
       let forename: string;

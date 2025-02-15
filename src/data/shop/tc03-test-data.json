@@ -1,0 +1,9 @@
+{
+    "testId": "TC03",
+    "testName": "Verify adding items to cart and validating cart count",
+    "description": "This test case verifies that items can be added to the cart and the cart count is updated correctly.",
+    "stuffedFrogQuantity": 2,
+    "fluffyBunnyQuantity": 5,
+    "valentineBearQuantity": 3,
+    "cartCount": 10
+  }

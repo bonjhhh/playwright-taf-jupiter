@@ -1,4 +1,5 @@
 import { test, expect } from '../fixtures/jupiter-test';
+import testData from '../data/contact/tc01-test-data.json';
 
 test.describe('Contact Page Tests', () => {
   test('Test Case 1: Verify error messages and populate mandatory fields', async ({ homePage, contactPage }) => {
@@ -15,13 +16,13 @@ test.describe('Contact Page Tests', () => {
       const forenameError = await contactPage.getForenameError();
       const emailError = await contactPage.getEmailError();
       const messageError = await contactPage.getMessageError();
-      expect(forenameError).toBe('Forename is required');
-      expect(emailError).toBe('Email is required');
-      expect(messageError).toBe('Message is required');
+      expect(forenameError).toBe(testData.expectedForenameError);
+      expect(emailError).toBe(testData.expectedEmailError);
+      expect(messageError).toBe(testData.expectedMessageError);
     });
 
     await test.step('Step 4: Populate mandatory fields', async () => {
-      await contactPage.fillMandatoryFields('John', 'john@example.com', 'This is a test message', '1234567890');
+      await contactPage.fillMandatoryFields(testData.forename, testData.email, testData.message, testData.telephone);
     });
 
     await test.step('Step 5: Validate errors are gone', async () => {

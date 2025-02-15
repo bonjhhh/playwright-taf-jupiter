@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class ShopPage {
   readonly page: Page;
@@ -6,6 +6,7 @@ export class ShopPage {
   readonly fluffyBunnyAddButton: Locator;
   readonly valentineBearAddButton: Locator;
   readonly cartLink: Locator;
+  readonly cartCount: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -13,10 +14,15 @@ export class ShopPage {
     this.fluffyBunnyAddButton = page.locator('li:has-text("Fluffy Bunny") .btn.btn-success:has-text("Buy")');
     this.valentineBearAddButton = page.locator('li:has-text("Valentine Bear") .btn.btn-success:has-text("Buy")');
     this.cartLink = page.locator('a[href$="cart"]');
+    this.cartCount = page.locator('a[href="#/cart"] .cart-count');
   }
 
   async navigate() {
     await this.page.goto('/#/shop');
+  }
+
+  async validateCartCount(expectedCount: number) {
+    await expect(this.cartCount).toHaveText(expectedCount.toString());
   }
 
   async addStuffedFrog(quantity: number) {
