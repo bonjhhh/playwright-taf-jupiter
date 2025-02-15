@@ -4,11 +4,13 @@ export class HomePage {
   readonly page: Page;
   readonly contactLink: Locator;
   readonly shopLink: Locator;
+  readonly startShoppingButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.contactLink = page.locator('a[href$="contact"]');
-    this.shopLink = page.locator('a[href$="shop"]');
+    this.contactLink = page.locator('a[href="#/contact"] >> text=Contact');
+    this.shopLink = page.getByRole('link', { name: 'Shop', exact: true });
+    this.startShoppingButton = page.getByRole('link', { name: 'Start Shopping »' });
   }
 
   async navigate() {
@@ -21,5 +23,9 @@ export class HomePage {
 
   async goToShopPage() {
     await this.shopLink.click();
+  }
+
+  async clickStartShoppingButton() {
+    await this.startShoppingButton.click();
   }
 }
