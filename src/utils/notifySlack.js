@@ -4,7 +4,7 @@ const axios = require('axios');
 require('dotenv').config(); // Load environment variables from .env file
 
 // Path to test-results.json
-const resultsPath = path.resolve(__dirname, '../../test-results.json');
+const resultsPath = path.resolve(__dirname, '../../artifacts/test-results.json');
 const packageJsonPath = path.resolve(__dirname, '../../package.json');
 
 let results;
@@ -43,7 +43,8 @@ function flattenSuites(suites) {
 }
 
 const flattenedSuites = flattenSuites(results.suites);
-console.log('Flattened Suites:', JSON.stringify(flattenedSuites, null, 2)); // Add logging to inspect flattened suites
+// Commented this in the meantime to avoid logging the entire test results
+//console.log('Flattened Suites:', JSON.stringify(flattenedSuites, null, 2)); // Add logging to inspect flattened suites
 
 // Calculate test stats
 const totalTests = flattenedSuites.reduce((acc, suite) => acc + (suite.specs ? suite.specs.reduce((specAcc, spec) => specAcc + (spec.tests ? spec.tests.length : 0), 0) : 0), 0);

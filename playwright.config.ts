@@ -10,10 +10,9 @@ export default defineConfig({
   retries: 0,
   reporter: [
     ['list'],
-    ['./src/utils/slackReporter.js'],      
+    //[require.resolve('./src/utils/customReporter.js')],
     ['html', { outputFolder: 'playwright-report' }],
     ['json', { outputFile: 'test-results.json' }],
-    
   ],
   use: {
     actionTimeout: 0,

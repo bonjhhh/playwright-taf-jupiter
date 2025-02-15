@@ -46,19 +46,22 @@ jobs:
 
       - name: Run tests
         run: |
-          npx playwright test --project=chromium --reporter=json,html
+          npm run test
 
-      - name: List Playwright report directory
+      - name: List Playwright report directory and test results
+        if: always()
         run: |
           ls -l playwright-report
+          ls -l test-results.json
 
       - name: Upload test results as artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
           path: |
             test-results.json
-            playwright-report/**
+            playwright-report/**     
 
   notify:
     runs-on: ubuntu-latest
@@ -76,12 +79,10 @@ jobs:
           name: test-reports  # Name of the artifact from the `test` job
           path: ./artifacts   # Path where you want to download the artifact
 
-      - name: Install dependencies for Slack notification
+      - name: Verify downloaded files
         run: |
-          sudo apt-get update
-          sudo apt-get install -y curl
-          ls -l ./artifacts  # Verify downloaded files
-          cat ./artifacts/test-results.json  # Verify the contents of the test-results.json
+          ls -lR ./artifacts  # Verify downloaded files recursively
+          cat ./artifacts/test-results.json  # Verify the contents of the test-results.json          
 
       - name: Send Slack notification
         run: |
@@ -93,15 +94,3 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # Ensure this secret is set in your repository settings
           GITHUB_JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-      - name: Upload payload as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: slack-payload
-          path: ./artifacts/test-results.json  # Path to the uploaded artifact
-
-      - name: Upload Playwright report as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: ./artifacts/playwright-report/**  # Path to the uploaded artifact

@@ -32,8 +32,12 @@ jspm_packages/
 playwright-report/
 test-results/
 results.xml
+
+# Ignore artifacts directory
+artifacts/
+
+# Ignore payload.json file
 payload.json
-test-results.json
 
 # VS Code settings
 .vscode/
