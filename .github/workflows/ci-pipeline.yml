@@ -52,7 +52,7 @@ jobs:
         if: always()
         run: |
           ls -l playwright-report
-          ls -l test-results.json
+          ls -l artifacts/test-results.json
 
       - name: Upload test results as artifacts
         if: always()
@@ -81,8 +81,7 @@ jobs:
 
       - name: Verify downloaded files
         run: |
-          ls -l ./artifacts  # Verify downloaded files
-          cat ./artifacts/test-results.json  # Verify the contents of the test-results.json
+          ls -l ./artifacts  # Verify downloaded files          
 
       - name: Send Slack notification
         run: |
