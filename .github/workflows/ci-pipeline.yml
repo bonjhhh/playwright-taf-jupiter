@@ -52,7 +52,7 @@ jobs:
         if: always()
         run: |
           ls -l playwright-report
-          ls -l artifacts/test-results.json
+          ls -l test-results.json
 
       - name: Upload test results as artifacts
         if: always()
