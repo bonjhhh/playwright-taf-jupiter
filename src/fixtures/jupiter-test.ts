@@ -3,13 +3,13 @@ import { HomePage } from '../pages/home';
 import { ContactPage } from '../pages/contact';
 import { ShopPage } from '../pages/shop';
 
-type MyFixtures = {
+type JupiterToys = {
   homePage: HomePage;
   contactPage: ContactPage;
   shopPage: ShopPage;
 };
 
-export const test = baseTest.extend<MyFixtures>({
+export const test = baseTest.extend<JupiterToys>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
   },
