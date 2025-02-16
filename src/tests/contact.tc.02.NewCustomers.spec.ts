@@ -1,9 +1,9 @@
 import { test, expect } from '../fixtures/jupiter-test';
 import { generateRandomData } from '../utils/test-data';
 
-test.describe('Contact Page Tests', () => {
-  test('Test Case 2: Validate successful submission message', async ({ homePage, contactPage, page }) => {
-    for (let i = 0; i < 5; i++) {
+test.describe('Contact Page Tests - New Customers', () => {
+  for (let i = 1; i <= 5; i++) {
+    test(`Test Case 2: Validate successful submission message - Run ${i}`, async ({ homePage, contactPage, page }) => {
       let forename: string;
       await test.step('Step 1: From the home page go to contact page', async () => {
         await homePage.navigate();
@@ -29,6 +29,6 @@ test.describe('Contact Page Tests', () => {
         const successMessage = await contactPage.getSuccessMessage();
         expect(successMessage).toContain(`Thanks ${forename}, we appreciate your feedback.`);
       });
-    }
-  });
+    });
+  }
 });
