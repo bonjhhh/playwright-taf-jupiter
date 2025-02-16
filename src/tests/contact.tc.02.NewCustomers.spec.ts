@@ -1,9 +1,10 @@
 import { test, expect } from '../fixtures/jupiter-test';
 import { generateRandomData } from '../utils/test-data';
+import { testData } from '../data/contact/tc02-test-data';
 
 test.describe('Contact Page Tests - New Customers', () => {
   for (let i = 1; i <= 5; i++) {
-    test(`Test Case 2: Validate successful submission message - Run ${i}`, async ({ homePage, contactPage, page }) => {
+    test(`${testData.testId}: ${testData.testName} - Run ${i}`, async ({ homePage, contactPage, page }) => {
       let forename: string;
       await test.step('Step 1: From the home page go to contact page', async () => {
         await homePage.navigate();

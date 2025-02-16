@@ -1,8 +1,8 @@
 import { test, expect } from '../fixtures/jupiter-test';
-import testData from '../data/contact/tc01-test-data.json';
+import { testData } from '../data/contact/tc01-test-data';
 
 test.describe('Contact Page Tests', () => {
-  test('Test Case 1: Verify error messages and populate mandatory fields', async ({ homePage, contactPage }) => {
+  test(`${testData.testId}: ${testData.testName}`, async ({ homePage, contactPage }) => {
     await test.step('Step 1: From the home page go to contact page', async () => {
       await homePage.navigate();
       await homePage.goToContactPage();
@@ -22,7 +22,7 @@ test.describe('Contact Page Tests', () => {
     });
 
     await test.step('Step 4: Populate mandatory fields', async () => {
-      await contactPage.fillMandatoryFields(testData.forename, testData.email, testData.message, testData.telephone);
+      await contactPage.fillMandatoryFields(testData.forename!, testData.email!, testData.message!, testData.telephone!);
     });
 
     await test.step('Step 5: Validate errors are gone', async () => {

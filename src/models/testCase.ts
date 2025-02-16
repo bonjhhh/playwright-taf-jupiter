@@ -17,15 +17,27 @@ export interface TestCase {
     expectedMessageError?: string;
   }
 
-  export interface ShopAndCartTestCase extends TestCase {    
-    stuffedFrogQuantity?: number;
-    fluffyBunnyQuantity?: number;
-    valentineBearQuantity?: number;
-    expectedStuffedFrogPrice?: number;
-    expectedFluffyBunnyPrice?: number;
-    expectedValentineBearPrice?: number;
+  export type ToyName = 
+  | 'Teddy Bear'
+  | 'Stuffed Frog'
+  | 'Handmade Doll'
+  | 'Fluffy Bunny'
+  | 'Smiley Bear'
+  | 'Funny Cow'
+  | 'Valentine Bear'
+  | 'Smiley Face';
+
+  export interface ToyOrder {
+    toyName: ToyName;
+    quantity: number;
+  }
+  
+  export interface ShopAndCartTestCase extends TestCase {
+    toyOrders?: ToyOrder[];
+    expectedPrices?: {
+      [key in ToyName]?: number;
+    };
     cartCount?: number;
-           
   }
 
   // For future use
