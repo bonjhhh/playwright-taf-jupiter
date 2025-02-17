@@ -28,7 +28,7 @@ src/
     contact/
       tc01-test-data.ts
       tc02-test-data.ts
-    shot/
+    shop/
       tc03-test-data.ts
   fixtures/
     jupiter-test.ts
