@@ -1,7 +1,7 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
+import { BasePage } from './basePage';
 
-export class ContactPage {
-  readonly page: Page;
+export class ContactPage extends BasePage {
   readonly forenameInput: Locator;
   readonly surnameInput: Locator;
   readonly emailInput: Locator;
@@ -16,7 +16,7 @@ export class ContactPage {
   readonly messageError: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.forenameInput = page.locator('#forename');
     this.surnameInput = page.locator('#surname');
     this.emailInput = page.locator('#email');
@@ -68,5 +68,28 @@ export class ContactPage {
 
   async getMessageError() {
     return this.messageError.textContent();
+  }
+
+  async checkAriaSnapshotSendingFeedback() {
+    await expect(this.page.locator('body')).toMatchAriaSnapshot(`- heading "Sending Feedback" [level=1]`);
+  }
+
+  async validateSuccessMessage(forename: string) {
+    const successMessage = await this.getSuccessMessage();
+    expect(successMessage).toContain(`Thanks ${forename}, we appreciate your feedback.`);
+  }
+
+  async validateErrorsAreGone() {
+    const errorMessagesAfterFilling = await this.getErrorMessages();
+    expect(errorMessagesAfterFilling.length).toBe(0);
+  }
+
+  async verifyErrorMessages(expectedForenameError: string, expectedEmailError: string, expectedMessageError: string) {
+    const forenameError = await this.getForenameError();
+    const emailError = await this.getEmailError();
+    const messageError = await this.getMessageError();
+    expect(forenameError).toBe(expectedForenameError);
+    expect(emailError).toBe(expectedEmailError);
+    expect(messageError).toBe(expectedMessageError);
   }
 }

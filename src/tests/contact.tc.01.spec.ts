@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/jupiter-test';
+import { test } from '../fixtures/jupiter-test';
 import { testData } from '../data/contact/tc01-test-data';
 
 test.describe('Contact Page Tests', () => {
@@ -13,12 +13,11 @@ test.describe('Contact Page Tests', () => {
     });
 
     await test.step('Step 3: Verify error messages', async () => {
-      const forenameError = await contactPage.getForenameError();
-      const emailError = await contactPage.getEmailError();
-      const messageError = await contactPage.getMessageError();
-      expect(forenameError).toBe(testData.expectedForenameError);
-      expect(emailError).toBe(testData.expectedEmailError);
-      expect(messageError).toBe(testData.expectedMessageError);
+      await contactPage.verifyErrorMessages(
+        testData.expectedForenameError!,
+        testData.expectedEmailError!,
+        testData.expectedMessageError!
+      );
     });
 
     await test.step('Step 4: Populate mandatory fields', async () => {
@@ -26,8 +25,7 @@ test.describe('Contact Page Tests', () => {
     });
 
     await test.step('Step 5: Validate errors are gone', async () => {
-      const errorMessagesAfterFilling = await contactPage.getErrorMessages();
-      expect(errorMessagesAfterFilling.length).toBe(0);
+      await contactPage.validateErrorsAreGone();
     });
   });
 });

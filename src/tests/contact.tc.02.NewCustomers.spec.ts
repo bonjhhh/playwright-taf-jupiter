@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/jupiter-test';
+import { test } from '../fixtures/jupiter-test';
 import { generateRandomData } from '../utils/test-data';
 import { testData } from '../data/contact/tc02-test-data';
 
@@ -23,13 +23,13 @@ test.describe('Contact Page Tests - New Customers', () => {
       });
 
       await test.step('Step 4: Check ARIA snapshot', async () => {
-        await expect(page.locator('body')).toMatchAriaSnapshot(`- heading "Sending Feedback" [level=1]`);
+        await contactPage.checkAriaSnapshotSendingFeedback();
       });
 
       await test.step('Step 5: Validate successful submission message', async () => {
-        const successMessage = await contactPage.getSuccessMessage();
-        expect(successMessage).toContain(`Thanks ${forename}, we appreciate your feedback.`);
+        await contactPage.validateSuccessMessage(forename);
       });
+      
     });
   }
 });

@@ -1,9 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { removeTrailingZeros } from '../utils/stringUtils';
-import { ShopPage } from './shop';
+import { BasePage } from './basePage';
 
-export class CartPage {
-  readonly page: Page;
+export class CartPage extends BasePage {
   readonly cartLink: Locator;
   readonly stuffedFrogRow: Locator;
   readonly fluffyBunnyRow: Locator;
@@ -11,7 +10,7 @@ export class CartPage {
   
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.cartLink = page.getByRole('link', { name: /Cart \(\d+\)/ });
     this.stuffedFrogRow = page.getByRole('row', { name: 'Stuffed Frog $10.99 2 $' });
     this.fluffyBunnyRow = page.getByRole('row', { name: 'Fluffy Bunny $9.99 6 $' });

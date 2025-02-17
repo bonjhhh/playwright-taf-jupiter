@@ -30,9 +30,11 @@ src/
       tc02-test-data.ts
   fixtures/
     jupiter-test.ts
+    expect.ts
   models/
     testCase.ts
   pages/
+    basePage.ts
     home.ts
     contact.ts
     shop.ts
@@ -42,8 +44,11 @@ src/
     contact.tc.02.NewCustomers.spec.ts
     contact.tc.02.OneCustomer.spec.ts
     shopAndCart.tc.03.spec.ts
-  utils/
-    test-data.ts
+  utils/    
+    customReporter.js
+    notifySlack.js
+    stringUtils.ts
+    test-data.ts 
 playwright.config.ts
 tsconfig.json
 package.json
@@ -96,7 +101,7 @@ Test cases are written in TypeScript and stored in the `src/tests` directory. Ea
 
 Example `contact.tc.01.spec.ts`:
 ```typescript
-import { test, expect } from '../fixtures/jupiter-test';
+import { test } from '../fixtures/jupiter-test';
 import { testData } from '../data/contact/tc01-test-data';
 
 test.describe('Contact Page Tests', () => {
@@ -111,12 +116,11 @@ test.describe('Contact Page Tests', () => {
     });
 
     await test.step('Step 3: Verify error messages', async () => {
-      const forenameError = await contactPage.getForenameError();
-      const emailError = await contactPage.getEmailError();
-      const messageError = await contactPage.getMessageError();
-      expect(forenameError).toBe(testData.expectedForenameError);
-      expect(emailError).toBe(testData.expectedEmailError);
-      expect(messageError).toBe(testData.expectedMessageError);
+      await contactPage.verifyErrorMessages(
+        testData.expectedForenameError!,
+        testData.expectedEmailError!,
+        testData.expectedMessageError!
+      );
     });
 
     await test.step('Step 4: Populate mandatory fields', async () => {
@@ -124,8 +128,7 @@ test.describe('Contact Page Tests', () => {
     });
 
     await test.step('Step 5: Validate errors are gone', async () => {
-      const errorMessagesAfterFilling = await contactPage.getErrorMessages();
-      expect(errorMessagesAfterFilling.length).toBe(0);
+      await contactPage.validateErrorsAreGone();
     });
   });
 });
@@ -168,3 +171,10 @@ export { expect } from '@playwright/test';
 To execute the tests within a continuous pipeline, you can set up GitHub Actions. Here is an example workflow file:
 
 ### GitHub Actions Workflow (`.github/workflows/ci-pipeline.yml`)
+
+
+## Slack notification
+
+When tests are executed via Continuous Integration (e.g., GitHub Actions), a job will send a notification to a specified Slack channel with the test results and a link to the job. This helps keep the team informed about the status of the test runs and any issues that need attention.
+
+![alt text](image.png)

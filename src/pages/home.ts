@@ -1,13 +1,13 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { BasePage } from './basePage';
 
-export class HomePage {
-  readonly page: Page;
+export class HomePage extends BasePage {
   readonly contactLink: Locator;
   readonly shopLink: Locator;
   readonly startShoppingButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.contactLink = page.locator('a[href="#/contact"] >> text=Contact');
     this.shopLink = page.getByRole('link', { name: 'Shop', exact: true });
     this.startShoppingButton = page.getByRole('link', { name: 'Start Shopping »' });
