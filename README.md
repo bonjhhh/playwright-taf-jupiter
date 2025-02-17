@@ -50,7 +50,6 @@ src/
     customReporter.js
     notifySlack.js
     stringUtils.ts
-    test-data.ts 
 playwright.config.ts
 tsconfig.json
 package.json

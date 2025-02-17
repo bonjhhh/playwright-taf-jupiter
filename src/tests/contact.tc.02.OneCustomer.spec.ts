@@ -13,8 +13,7 @@ test.describe('Contact Page Tests - Same Customer', () => {
         await contactPage.fillMandatoryFields(
           testData.forename!,
           testData.email!,
-          testData.message!,
-          testData.telephone!
+          testData.message!
         );
       });
 

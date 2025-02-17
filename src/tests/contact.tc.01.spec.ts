@@ -21,7 +21,7 @@ test.describe('Contact Page Tests', () => {
     });
 
     await test.step('Step 4: Populate mandatory fields', async () => {
-      await contactPage.fillMandatoryFields(testData.forename!, testData.email!, testData.message!, testData.telephone!);
+      await contactPage.fillMandatoryFields(testData.forename!, testData.email!, testData.message!);
     });
 
     await test.step('Step 5: Validate errors are gone', async () => {

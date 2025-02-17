@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './basePage';
+import { generateRandomAlpha, generateRandomNumeric } from '../utils/stringUtils';
 
 export class ContactPage extends BasePage {
   readonly forenameInput: Locator;
@@ -39,11 +40,10 @@ export class ContactPage extends BasePage {
     await this.submitButton.click();
   }
 
-  async fillMandatoryFields(forename: string, email: string, message: string, telephone: string) {
+  async fillMandatoryFields(forename: string, email: string, message: string) {
     await this.forenameInput.fill(forename);
     await this.emailInput.fill(email);
     await this.messageInput.fill(message);
-    await this.telephoneInput.fill(telephone);
   }
 
   async getErrorMessages() {
@@ -91,5 +91,14 @@ export class ContactPage extends BasePage {
     expect(forenameError).toBe(expectedForenameError);
     expect(emailError).toBe(expectedEmailError);
     expect(messageError).toBe(expectedMessageError);
+  }
+
+  generateContactPageData() {
+    const forename = `Clark${generateRandomAlpha(4)}`; 
+    const email = `clark${generateRandomNumeric(3)}@example.com`;
+    const message = `This is a test message ${generateRandomNumeric(3)}`;
+    const telephone = `123456789${generateRandomNumeric(1)}`;
+
+    return { forename, email, message, telephone };
   }
 }
