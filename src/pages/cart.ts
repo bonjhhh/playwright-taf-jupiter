@@ -66,10 +66,10 @@ export class CartPage extends BasePage {
     const totalText = await this.page.locator('tfoot .total').textContent();
     
     // Extract the actual total from the totalText is a little bit tricky value is undefined
-    // and will revisit this later and will use totalText with strint 'Total: ' when comparing on calculated value
+    // and will revisit this later and will use totalText with string 'Total: ' when comparing on calculated value
     const actualTotal = totalText?.replace('Total: $', '').trim();
 
-    // Ensure CalculatedTotal total is formatted to two decimal places    
+    // Ensuring CalculatedTotal total is formatted to two decimal places    
     const formattedCalculatedTotal = removeTrailingZeros(parseFloat(calculatedTotal).toFixed(2));
     
     console.log(`Formatted Calculated Total: $${formattedCalculatedTotal}`);    
