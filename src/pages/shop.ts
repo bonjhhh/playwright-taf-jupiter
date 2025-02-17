@@ -1,13 +1,13 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { ToyName } from '../models/testCase';
+import { BasePage } from './basePage';
 
-export class ShopPage {
-  readonly page: Page;
+export class ShopPage extends BasePage {
   readonly cartLink: Locator;
   readonly cartCount: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.cartLink = page.locator('a[href$="cart"]');
     this.cartCount = page.locator('a[href="#/cart"] .cart-count');
   }

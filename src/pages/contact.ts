@@ -1,7 +1,8 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
+import { BasePage } from './basePage';
+import { generateRandomAlpha, generateRandomNumeric } from '../utils/stringUtils';
 
-export class ContactPage {
-  readonly page: Page;
+export class ContactPage extends BasePage {
   readonly forenameInput: Locator;
   readonly surnameInput: Locator;
   readonly emailInput: Locator;
@@ -16,7 +17,7 @@ export class ContactPage {
   readonly messageError: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.forenameInput = page.locator('#forename');
     this.surnameInput = page.locator('#surname');
     this.emailInput = page.locator('#email');
@@ -39,11 +40,10 @@ export class ContactPage {
     await this.submitButton.click();
   }
 
-  async fillMandatoryFields(forename: string, email: string, message: string, telephone: string) {
+  async fillMandatoryFields(forename: string, email: string, message: string) {
     await this.forenameInput.fill(forename);
     await this.emailInput.fill(email);
     await this.messageInput.fill(message);
-    await this.telephoneInput.fill(telephone);
   }
 
   async getErrorMessages() {
@@ -68,5 +68,37 @@ export class ContactPage {
 
   async getMessageError() {
     return this.messageError.textContent();
+  }
+
+  async checkAriaSnapshotSendingFeedback() {
+    await expect(this.page.locator('body')).toMatchAriaSnapshot(`- heading "Sending Feedback" [level=1]`);
+  }
+
+  async validateSuccessMessage(forename: string) {
+    const successMessage = await this.getSuccessMessage();
+    expect(successMessage).toContain(`Thanks ${forename}, we appreciate your feedback.`);
+  }
+
+  async validateErrorsAreGone() {
+    const errorMessagesAfterFilling = await this.getErrorMessages();
+    expect(errorMessagesAfterFilling.length).toBe(0);
+  }
+
+  async verifyErrorMessages(expectedForenameError: string, expectedEmailError: string, expectedMessageError: string) {
+    const forenameError = await this.getForenameError();
+    const emailError = await this.getEmailError();
+    const messageError = await this.getMessageError();
+    expect(forenameError).toBe(expectedForenameError);
+    expect(emailError).toBe(expectedEmailError);
+    expect(messageError).toBe(expectedMessageError);
+  }
+
+  generateContactPageData() {
+    const forename = `Clark${generateRandomAlpha(4)}`; 
+    const email = `clark${generateRandomNumeric(3)}@example.com`;
+    const message = `This is a test message ${generateRandomNumeric(3)}`;
+    const telephone = `123456789${generateRandomNumeric(1)}`;
+
+    return { forename, email, message, telephone };
   }
 }

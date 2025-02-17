@@ -1,9 +1,8 @@
 import { test, expect } from '../fixtures/jupiter-test';
-import { CartPage } from '../pages/cart';
 import { testCase } from '../data/shop/tc03-test-data';
 
 test.describe('Shop Page Tests', () => {
-  test(testCase.testName!, async ({ homePage, shopPage }) => {
+  test(testCase.testName!, async ({ homePage, shopPage, cartPage }) => {
     await test.step('Step 1: Navigate to the shop page', async () => {
       await homePage.navigate();
       await homePage.goToShopPage();
@@ -17,8 +16,6 @@ test.describe('Shop Page Tests', () => {
       }
     });
 
-    const cartPage = new CartPage(shopPage.page);
-
     await test.step('Step 3: Validate the count of toys in the cart', async () => {
       await shopPage.validateCartCount(testCase.cartCount || 0);
     });
@@ -28,7 +25,7 @@ test.describe('Shop Page Tests', () => {
     });
 
     await test.step('Step 5: Verify that the cart page is displayed', async () => {
-      await expect(shopPage.page).toHaveURL(/.*\/cart/);
+      await shopPage.verifyCartPageDisplayed();
     });
 
     await test.step('Step 6: Validate the subtotal for each item in the cart', async () => {

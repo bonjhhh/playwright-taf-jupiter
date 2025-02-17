@@ -1,10 +1,9 @@
-import { test, expect } from '../fixtures/jupiter-test';
-import { generateRandomData } from '../utils/test-data';
+import { test } from '../fixtures/jupiter-test';
 import { testData } from '../data/contact/tc02-test-data';
 
 test.describe('Contact Page Tests - New Customers', () => {
   for (let i = 1; i <= 5; i++) {
-    test(`${testData.testId}: ${testData.testName} - Run ${i}`, async ({ homePage, contactPage, page }) => {
+    test(`${testData.testId}: ${testData.testName} - Run ${i}`, async ({ homePage, contactPage }) => {
       let forename: string;
       await test.step('Step 1: From the home page go to contact page', async () => {
         await homePage.navigate();
@@ -12,10 +11,10 @@ test.describe('Contact Page Tests - New Customers', () => {
       });
 
       await test.step('Step 2: Populate mandatory fields with random data', async () => {
-        const data = generateRandomData();
+        const data = contactPage.generateContactPageData();
         forename = data.forename;
-        const { email, message, telephone } = data;
-        await contactPage.fillMandatoryFields(forename, email, message, telephone);
+        const { email, message } = data;
+        await contactPage.fillMandatoryFields(forename, email, message);
       });
 
       await test.step('Step 3: Click submit button', async () => {
@@ -23,13 +22,13 @@ test.describe('Contact Page Tests - New Customers', () => {
       });
 
       await test.step('Step 4: Check ARIA snapshot', async () => {
-        await expect(page.locator('body')).toMatchAriaSnapshot(`- heading "Sending Feedback" [level=1]`);
+        await contactPage.checkAriaSnapshotSendingFeedback();
       });
 
       await test.step('Step 5: Validate successful submission message', async () => {
-        const successMessage = await contactPage.getSuccessMessage();
-        expect(successMessage).toContain(`Thanks ${forename}, we appreciate your feedback.`);
+        await contactPage.validateSuccessMessage(forename);
       });
+      
     });
   }
 });
