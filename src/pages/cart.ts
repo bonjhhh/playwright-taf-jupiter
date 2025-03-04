@@ -22,6 +22,9 @@ export class CartPage extends BasePage {
     await this.cartLink.click();
   } 
 
+  // Initially - I thought of validating the cart details based on hard-coded values (e.g. based on expectedPrice, expectedQuantity, expectedSubtotal)
+  // But I realized that it would be better to validate the cart details based on the actual values in the cart.
+  // This is because the cart details are dynamic and can change based on the user's actions.
   async validateCartItem(toy: string, expectedPrice: string, expectedQuantity: number, expectedSubtotal: string) {
     const row = this.page.locator(`tr:has-text("${toy}")`);
     const price = row.locator('td').nth(1);
@@ -33,6 +36,9 @@ export class CartPage extends BasePage {
     await expect(subtotal).toHaveText(expectedSubtotal);
   }
 
+  // I created a separate method for validating the cart item subtotal because it is a common validation that can be reused in other test cases.
+  // This method validates the subtotal of a cart item based on the toy name and expected quantity.
+  // The method calculates the subtotal based on the price and quantity of the toy and compares it with the actual subtotal in the cart.
   async validateCartItemSubTotal(toy: string, expectedQuantity: number) {
     const row = this.page.locator(`tr:has-text("${toy}")`);
     const priceText = await row.locator('td').nth(1).textContent();
@@ -60,6 +66,9 @@ export class CartPage extends BasePage {
     await expect(price).toHaveText(`$${expectedPrice.toFixed(2)}`);
   }
 
+  // I created a separate method for validating the cart total because it is a common validation that can be reused in other test cases.
+  // This method calculates the total based on the subtotals of the cart items and compares it with the actual total in the cart.
+  // 
  async validateCartTotal() {
     const subtotals = await this.page.locator('tr td:nth-child(4)').allTextContents();
     const calculatedTotal = subtotals.reduce((sum, subtotal) => sum + parseFloat(subtotal.replace('$', '')), 0).toFixed(2);
